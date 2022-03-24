@@ -6,7 +6,12 @@
   "version": "0.1.0",
 
   "browser_action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": "res/icons/technoboard(16x16px).png"
+  },
+  "icons": {
+    "16": "res/icons/technoboard(16x16px).png",    
+    "48": "res/icons/technoboard(48x48px).png"
   },
   "permissions": [
     "activeTab"
