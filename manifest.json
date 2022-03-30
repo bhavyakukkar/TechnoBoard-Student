@@ -19,7 +19,7 @@
   "content_scripts": [
     {
       "matches": ["https://christuniversity.webex.com/wbxmjs/joinservice/sites/christuniversity/meeting/download/*"],
-      "js": ["student/s-ATS/s-ATS-update.js"]
+      "js": ["student/s-ATS/client/s-ATS-update.js"]
     }
   ]
 }
