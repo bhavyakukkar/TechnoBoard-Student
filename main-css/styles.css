@@ -1,7 +1,7 @@
 body {
 	font-family: 'Helvetica';
 	background-color: #21325E;
-	width: 700px;
+	width: 350px;
 	padding: 10px;
 	margin: 0;
 }
@@ -21,6 +21,6 @@ h1{
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: normal;
-	font-size: 59px; 
+	font-size: 30px; 
 }
  
