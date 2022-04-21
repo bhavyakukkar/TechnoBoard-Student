@@ -6,7 +6,6 @@
   "version": "0.1.0",
 
   "action": {
-    "default_popup": "popup.html",
     "default_icon": "res/icons/technoboard(16x16px).png"
   },
   "icons": {
@@ -18,9 +17,16 @@
   ],
   "content_scripts": [
     {
-      "matches": ["https://christuniversity.webex.com/wbxmjs/joinservice/sites/christuniversity/meeting/download/*",
+      "matches": ["https://christuniversity.webex.com/*",
       "https://meet.google.com/*"],
-      "js": ["ATS-update.js"]
+      "js": ["script.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "matches": ["https://christuniversity.webex.com/*",
+      "https://meet.google.com/*"],
+      "resources": ["popup.html"]
     }
   ]
 }
