@@ -16,7 +16,7 @@
                 padding: 10px;
                 margin: 0;
             }
-            button{
+            .button{
                 display:inline-block;
                 color:#020241;
                 text-align:center;
@@ -60,7 +60,7 @@
                 top:0;
                 right:15px;
                 width:400px;
-                height:300px;
+                height:500px;
                 border:3px solid #FFE754;
             }
             #index_link{
@@ -71,12 +71,43 @@
                 font-weight:normal;
                 font-size:15px;
             }
+            #captcha{
+                height:90px;
+                width:250px;
+                background-color:#FFE754;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                flex-direction:column;
+                color:#020241;
+            }
+            #captcha_text{
+                height:80%;
+                width:80%;
+                font-size:30px;
+                letter-spacing:3px;
+                margin:auto;
+                display:block;
+                top:0;
+                bottom:0;
+                left:0;
+                right:0;
+            }
+            #textBox{
+                height:25px;
+            }
+            .incorrectCaptcha{
+                color:#FF0000;
+            }
+            .correctCaptcha{
+                color:#7fff00;
+            }
         </style>
         <div class="main">
             <div class="header">
                 <center>
                     <h1>TechnoBoard</h1>
-                    <h3>Student Login</h3>
+                    <h3>Hello, dear student!</h3>
                 </center>
             </div>
             <div>
@@ -86,7 +117,16 @@
                     <p id="index_link">Please pay attention in class!</p>
                     <!--The Extension will start working when the hosts creates a meet-->
                     <!--Dummy code to work with the files, these files are to be deleted later on-->
-                    <button id="button">Yes, I am here!</button>
+                    <div id="captcha">
+                        <canvas id="captcha_text">captcha text</canvas>
+                    </div>
+                    <br>
+                    <input id="textBox" type="text" name="text">
+                    <br>
+                    <button id="submitButton" class="button" type="submit">Yes, I am here!</button>
+                    <!--<button id="refreshButton" type="submit" class="button">Refresh</button>-->
+                    <span id="output"></span>
+                    <script src="script_captcha.js"></script>
                     <!--Dummy buttons to work with, these will be deleted later on-->
                     <!--<a href="/student/s-ATS/client/s-ATS-sign.html"><button>ATS</button></a>-->
                 </center>
