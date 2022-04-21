@@ -1,31 +1,35 @@
-/*var $has_teacher_requested = $("#request-open");
-setInterval(function () {
-    $has_teacher_requested.load("s-ATS-request.php #main");
-}, 30000);*/
-
-/*var button = document.getElementById('clickme');
-button.addEventListener("click", function() {
-    update();
-});*/
-
 function update() {
     
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            alert(this.responseText);
+            var parser = new DOMParser();
+            var responseDoc = parser.parseFromString(this.responseText, "text/html");
+
+            if(responseDoc.getElementById("publish").innerHTML == "True")
+                inject_sign();
         }
     };
     xmlhttp.open("GET", "https://technoboard-extension.000webhostapp.com/ATS/php/student/s-ATS-search-request.php?t=roseline&c=csc101", true);
     xmlhttp.send();
 }
 
-/*function loop() {
-    update();
-    setTimeout(loop(), 20000);
+function sign() {
+    alert("signing");
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "https://technoboard-extension.000webhostapp.com/ATS/php/student/s-ATS-sign.php?id=bhavya&t=roseline&c=csc101", true);
+    xmlhttp.send();
 }
 
-loop();*/
 setInterval(function() {
     update();
-}, 10000);
+}, 2000);
+
+function inject_sign() {
+    
+    fetch(chrome.runtime.getURL('/popup.html')).then(r => r.text()).then(html => {
+        document.body.insertAdjacentHTML('beforeend', html);
+    });
+    var signButton = document.getElementById("index_link");
+    signButton.addEventListener("click", sign);
+}
