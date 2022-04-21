@@ -14,17 +14,6 @@ function update() {
     xmlhttp.send();
 }
 
-function sign() {
-    alert("signing");
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://technoboard-extension.000webhostapp.com/ATS/php/student/s-ATS-sign.php?id=bhavya&t=roseline&c=csc101", true);
-    xmlhttp.send();
-}
-
-setInterval(function() {
-    update();
-}, 2000);
-
 function inject_sign() {
     
     fetch(chrome.runtime.getURL('/popup.html')).then(r => r.text()).then(html => {
@@ -33,3 +22,16 @@ function inject_sign() {
     var signButton = document.getElementById("index_link");
     signButton.addEventListener("click", sign);
 }
+
+function sign() {
+    alert("signing");
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "https://technoboard-extension.000webhostapp.com/ATS/php/student/s-ATS-sign.php?id=bhavya&t=roseline&c=csc101", true);
+    xmlhttp.send();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    setInterval(function() {
+        update();
+    }, 2000);
+});
