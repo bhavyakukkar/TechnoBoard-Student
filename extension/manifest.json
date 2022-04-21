@@ -26,7 +26,7 @@
     {
       "matches": ["https://christuniversity.webex.com/*",
       "https://meet.google.com/*"],
-      "resources": ["popup.html"]
+      "resources": ["sign.html"]
     }
   ]
 }
