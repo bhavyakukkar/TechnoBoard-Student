@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<style>
-		#publish {
-			display: none;
-		}
-	</style>
-</head>
-<body>
 <?php
-
+	header('Access-Control-Allow-Origin: *');
+	
 	$data_directory = "../../database/";
 
 	function loginTeacher($teacher_id) {
@@ -35,9 +26,9 @@
 		return $portal;
 	}
 
-	if( !empty($_GET['t']) and !empty($_GET['c']) ) {
-		$teacher_id = $_GET['t'];
-		$class_id = $_GET['c'];
+	if( !empty($_REQUEST['t']) and !empty($_REQUEST['c']) ) {
+		$teacher_id = $_REQUEST['t'];
+		$class_id = $_REQUEST['c'];
 
 		$portal = findPortal(
 			loginClass(
@@ -46,11 +37,29 @@
 			)
 		);
 
-		if($portal['publish'] == "true")
-			print '<div id="publish">True</div>';
-		else
-			print '<div id="publish">False</div>';
+		if($portal['publish'] == "true") {
+			echo "True";
+			//print '<div id="publish">True</div>';
+		}
+		else {
+			echo "False";
+			//print '<div id="publish">False</div>';
+		}
+	}
+	else {
+		echo "error";
 	}
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		#publish {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+
 </body>
 </html>
