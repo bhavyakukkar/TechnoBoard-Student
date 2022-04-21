@@ -38,19 +38,17 @@
 		);
 
 		if($portal['publish'] == "true") {
-			echo "True";
-			//print '<div id="publish">True</div>';
+			print '<div id="publish">True</div>';
 		}
 		else {
-			echo "False";
-			//print '<div id="publish">False</div>';
+			print '<div id="publish">False</div>';
 		}
 	}
 	else {
-		echo "error";
+		print '<div id="publish">Error</div>';
 	}
 ?>
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
 <head>
 	<style>
@@ -62,4 +60,4 @@
 <body>
 
 </body>
-</html>
+</html>-->
