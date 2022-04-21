@@ -45,7 +45,7 @@ function suspendUpdate() {
 //Injects student-acknowledgement popup
 function inject_sign() {
     
-    fetch(chrome.runtime.getURL('/popup.html')).then(r => r.text()).then(html => {
+    fetch(chrome.runtime.getURL('/sign.html')).then(r => r.text()).then(html => {
         document.body.insertAdjacentHTML('beforeend', html);
     });
     setTimeout(function() {
