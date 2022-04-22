@@ -5,66 +5,133 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechnoBoard Student</title>
-
 </head>
 <body>
     <div id="Technoboard-Student-ATS-Sign">
-
         <style scoped>
-            body {
-                font-family: 'Helvetica';
+            body{
+                font-family:'Helvetica';
                 background-color: #21325E;
                 width: 350px;
                 padding: 10px;
                 margin: 0;
             }
-            button {
+            .button{
                 display:inline-block;
-                height: 125px;
-                width: 125px;
-                background-color: #FFE754;
-                border-radius: 20px;
-                border: 1px solid black;
-                padding: 50px;
-                margin: 20px;
+                color:#020241;
+                text-align:center;
+                background-color:#FFE754;
+                border-radius:15px;
+                padding:15px 25px;
+                margin:20px;
+                font-size:15px;
+                cursor:pointer;
+                box-shadow:0 9px #534a0f;
+                font-weight:bold;
+            }
+            .button:hover{
+                background-color:#9e8b0c;
+            }
+            .button:active{
+                background-color:#9e8b0c;
+                box-shadow:0 5px #534a0f;
+                transform:translateY(4px);
             }
             h1{
-                text-align: center;
-                color: antiquewhite;
-                font-family: Roboto;
-                font-style: normal;
-                font-weight: normal;
-                font-size: 30px; 
+                text-align:center;
+                color:#FFE754;
+                font-family:Roboto;
+                font-style:normal;
+                font-weight:700px;
+                font-size:30px; 
+            }
+            h3{
+                text-align:center;
+                color:#ddd289;
+                font-family:Roboto;
+                font-style:normal;
+                font-weight:500px;
+                font-size:20px; 
             }
             .main{
-                background: black;
-                position: absolute;
+                background:#020241;
+                position:absolute;
                 z-index:10000000;
                 top:0;
                 right:15px;
+                width:400px;
+                height:500px;
                 border:3px solid #FFE754;
             }
+            #index_link{
+                text-align:center;
+                color:#d6d1ad;
+                font-family:Roboto;
+                font-style:italic;
+                font-weight:normal;
+                font-size:15px;
+            }
+            #captcha{
+                height:90px;
+                width:250px;
+                background-color:#FFE754;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                flex-direction:column;
+                color:#020241;
+            }
+            #captcha_text{
+                height:80%;
+                width:80%;
+                font-size:30px;
+                letter-spacing:3px;
+                margin:auto;
+                display:block;
+                top:0;
+                bottom:0;
+                left:0;
+                right:0;
+            }
+            #textBox{
+                height:25px;
+            }
+            .incorrectCaptcha{
+                color:#FF0000;
+            }
+            .correctCaptcha{
+                color:#7fff00;
+            }
         </style>
-
-
-
-
         <div class="main">
             <div class="header">
-                <h1> TechnoBoard Student</h1>
+                <center>
+                    <h1>TechnoBoard</h1>
+                    <h3>Hello, dear student!</h3>
+                </center>
             </div>
-
             <div>
-                <a id="index_link">are you paying attention?</a>
-                The Extension will start working when the hosts creates a meet
-                <!--Dummy code to work with the files, these files are to be deleted later on-->
-                Dummy buttons to work with, these will be deleted later on
-                <!--<a href="/student/s-ATS/client/s-ATS-sign.html"><button>ATS</button></a>-->
+                <center>
+                    <a id="index_link">Are you paying attention in class?</a>
+                    <br>
+                    <p id="index_link">Please pay attention in class!</p>
+                    <!--The Extension will start working when the hosts creates a meet-->
+                    <!--Dummy code to work with the files, these files are to be deleted later on-->
+                    <div id="captcha">
+                        <canvas id="captcha_text">captcha text</canvas>
+                    </div>
+                    <br>
+                    <input id="textBox" type="text" name="text">
+                    <br>
+                    <button id="submitButton" class="button" type="submit">Yes, I am here!</button>
+                    <!--<button id="refreshButton" type="submit" class="button">Refresh</button>-->
+                    <span id="output"></span>
+                    <script src="script_captcha.js"></script>
+                    <!--Dummy buttons to work with, these will be deleted later on-->
+                    <!--<a href="/student/s-ATS/client/s-ATS-sign.html"><button>ATS</button></a>-->
+                </center>
             </div>
-            
         </div>
-    
     </div>
-
 </body>
 </html>
