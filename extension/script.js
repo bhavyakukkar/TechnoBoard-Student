@@ -29,7 +29,7 @@ function update() {
             }
         }
     };
-    xmlhttp.open("GET", "https://technoboard-extension.000webhostapp.com/ATS/php/student/s-ATS-search-request.php?t=roseline&c=csc101", true);
+    xmlhttp.open("GET", "https://technoboard-extension.000webhostapp.com/ATS/php/student/s-ATS-search-request.php?t=john1024&c=csc101", true);
     xmlhttp.send();
 }
 
@@ -57,7 +57,7 @@ function inject_sign() {
 function sign() {
     
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://technoboard-extension.000webhostapp.com/ATS/php/student/s-ATS-sign.php?id=bhavya&t=roseline&c=csc101", true);
+    xmlhttp.open("GET", "https://technoboard-extension.000webhostapp.com/ATS/php/student/s-ATS-sign.php?id=bhavya&t=john1024&c=csc101", true);
     xmlhttp.send();
 }
 
