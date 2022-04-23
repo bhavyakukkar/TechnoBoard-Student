@@ -1,5 +1,9 @@
 var seekRequest = true;
 
+var signInjected = false;
+var saluteInjected = false;
+var failInjected = false;
+
 //Init method
 function init() {
     updateLoop();
@@ -24,7 +28,12 @@ function update() {
             if(responseDoc.getElementById("publish").innerHTML == "True") {
                 if(seekRequest) {
                     suspendUpdate();
-                    inject_sign();
+
+                    injectSign();
+
+                    setTimeout(function() {
+                        ejectSign();
+                    }, 180000);
                 }
             }
         }
@@ -33,24 +42,61 @@ function update() {
     xmlhttp.send();
 }
 
-//Suspends update() for 10 seconds
+//Suspends update() for 3 minutes
 function suspendUpdate() {
     
     seekRequest = false;
     setTimeout(function() {
         seekRequest = true;
-    }, 300000);
+    }, 180000);
 }
 
-//Injects student-acknowledgement popup
-function inject_sign() {
-    
-    fetch(chrome.runtime.getURL('/sign.html')).then(r => r.text()).then(html => {
+//Abstract inject function
+function inject(source) {
+    fetch(chrome.runtime.getURL(source)).then(r => r.text()).then(html => {
         document.body.insertAdjacentHTML('beforeend', html);
     });
     setTimeout(function() {
         document.getElementById("index_link").addEventListener("click", sign);
     }, 500);
+}
+
+//Eject all injected content
+function eject() {
+    document.body.removeChild(document.getElementById("Technoboard-Student-ATS-Sign"));
+}
+
+//Injects student-acknowledgement popup
+function injectSign() {
+    
+    if(!signInjected)
+        inject('../html/sign.html');
+    
+    signInjected = true;
+}
+
+//Injects salute after student responded within 3 mins
+function injectSalute() {
+    inject('../html/salute.html');
+}
+
+//Injects salute after student failed to respond within 3 mins
+function injectFail() {
+    inject('../html/fail.html');
+}
+
+//Removes student-acknowledge popup
+function ejectSign(inTime) {
+    
+    if(signInjected)
+        eject();
+    
+    if(inTime)
+        injectSalute();
+    else
+        injectFail();
+    
+    signInjected = false;
 }
 
 //Adds student signature to attention-track request
@@ -59,9 +105,9 @@ function sign() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "https://technoboard-extension.000webhostapp.com/ATS/php/student/s-ATS-sign.php?id=bhavya&t=john1024&c=csc101", true);
     xmlhttp.send();
+
+    ejectSign();
 }
-
-
 
 if (document.readyState !== 'loading') {
     init();

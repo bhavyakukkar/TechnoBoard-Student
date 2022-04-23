@@ -19,14 +19,14 @@
     {
       "matches": ["https://christuniversity.webex.com/*",
       "https://meet.google.com/*"],
-      "js": ["script.js"]
+      "js": ["js/script.js"]
     }
   ],
   "web_accessible_resources": [
     {
       "matches": ["https://christuniversity.webex.com/*",
       "https://meet.google.com/*"],
-      "resources": ["sign.html"]
+      "resources": ["html/sign.html"]
     }
   ]
 }
