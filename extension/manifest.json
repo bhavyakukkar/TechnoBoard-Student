@@ -12,6 +12,7 @@
     "16": "res/icons/technoboard(16x16px).png",    
     "48": "res/icons/technoboard(48x48px).png"
   },
+  
   "host_permissions": [
     "https://technoboard-extension.000webhostapp.com/"
   ],
@@ -27,6 +28,12 @@
       "matches": ["https://christuniversity.webex.com/*",
       "https://meet.google.com/*"],
       "resources": ["html/sign.html"]
+    },
+    {
+      "matches": ["https://christuniversity.webex.com/*",
+        "https://meet.google.com/*"],
+        "resources": ["html/login.html","js/login.js"]
+    
     }
   ]
 }
