@@ -60,47 +60,24 @@
                 top:0;
                 right:15px;
                 width:400px;
-                height:500px;
+                height:300px;
                 border:3px solid #FFE754;
             }
-            .text{
+            .text01{
                 text-align:center;
                 color:#d6d1ad;
                 font-family:Roboto;
                 font-style:italic;
                 font-weight:normal;
-                font-size:15px;
+                font-size:19px;
             }
-            #captcha{
-                height:90px;
-                width:250px;
-                background-color:#FFE754;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                flex-direction:column;
-                color:#020241;
-            }
-            #captcha_text{
-                height:80%;
-                width:80%;
-                font-size:30px;
-                letter-spacing:3px;
-                margin:auto;
-                display:block;
-                top:0;
-                bottom:0;
-                left:0;
-                right:0;
-            }
-            #textBox{
-                height:25px;
-            }
-            .incorrectCaptcha{
-                color:#FF0000;
-            }
-            .correctCaptcha{
-                color:#7fff00;
+            .text02{
+                text-align:center;
+                color:#d6d1ad;
+                font-family:Roboto;
+                font-style:unset;
+                font-weight:normal;
+                font-size:16px;
             }
         </style>
         <div class="main">
@@ -112,20 +89,10 @@
             </div>
             <div>
                 <center>
-                    <p class="text">Are you paying attention in class?</a>
+                    <p class="text01">Are you paying attention in class?</a>
                     <br>
-                    <p class="text">Please pay attention in class!</p>
-
-                    <div id="captcha">
-                        <canvas id="captcha_text">captcha text</canvas>
-                    </div><br>
-
-                    <input id="textBox" type="text" name="text"><br>
-
+                    <p class="text02">Click the button to confirm your presence.</p>
                     <button id="index_link" class="button">Yes, I am here!</button>
-                    
-                    <span id="output"></span>
-                    <script src="../js/script_captcha.js"></script>
                 </center>
             </div>
         </div>
