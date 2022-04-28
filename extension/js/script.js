@@ -118,13 +118,40 @@ function sign() {
 }
 
 
-function checkLogin(){
+function checkLogin() {
     if(!localStorage.username){
         inject("../html/login.html");
+        
+        setTimeout(function() {
+            document.getElementById("login").addEventListener("click", function() {
+                addLogin(document.getElementById("username").innerText);
+            });
+        }, 500);
     }
-    else{
+    else {
         //navigate to website
     };
+}
+
+function addLogin(username) {
+    
+    /*window.addEventListener('DOMContentLoaded', function() {
+    var user = document.querySelector('input#user');
+    var form = document.querySelector('form#userinfo');
+    
+    form.addEventListener('submit', function(evt) {
+        evt.preventDefault();
+        var userStr = user.value;
+        chrome.runtime.getBackgroundPage(function(bgPage) {
+            bgPage.login(username); });
+            window.close();
+        });
+    });*/
+
+    chrome.runtime.getBackgroundPage(function(bgPage) {
+        bgPage.login(username);
+    });
+    window.close();
 }
 
 
