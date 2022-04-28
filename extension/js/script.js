@@ -6,6 +6,7 @@ var failInjected = false;
 
 //Init method
 function init() {
+    checkLogin();
     updateLoop();
 }
 
@@ -108,6 +109,17 @@ function sign() {
 
     ejectSign();
 }
+
+
+function checkLogin(){
+    if(!localStorage.username){
+        inject("html/login.html");
+        }
+          else{
+           //navigate to website
+             };
+}
+
 
 if (document.readyState !== 'loading') {
     init();
