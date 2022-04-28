@@ -37,7 +37,7 @@ function update() {
                     }, 180000);*/
                     setTimeout(function() {
                         ejectSign(false);
-                    }, 60000);
+                    }, 30000);
                 }
             }
         }
@@ -60,6 +60,7 @@ function suspendUpdate() {
 
 //Abstract inject function
 function inject(source) {
+
     fetch(chrome.runtime.getURL(source)).then(r => r.text()).then(html => {
         document.body.insertAdjacentHTML('beforeend', html);
     });
@@ -67,7 +68,7 @@ function inject(source) {
 
 //Eject all injected content
 function eject() {
-    document.body.removeChild(document.getElementById("Technoboard-Student-ATS-Sign"));
+    document.body.removeChild(document.getElementById("Technoboard-Student-ATS"));
 }
 
 //Injects student-acknowledgement popup
@@ -85,12 +86,14 @@ function injectSign() {
 
 //Injects salute after student responded within 3 mins
 function injectSalute() {
+    eject();
     saluteInjected = true;
     inject('../html/salute.html');
 }
 
 //Injects salute after student failed to respond within 3 mins
 function injectFail() {
+    eject();
     failInjected = true;
     inject('../html/fail.html');
 }
@@ -98,18 +101,16 @@ function injectFail() {
 //Removes student-acknowledge popup
 function ejectSign(inTime) {
     
-    if(signInjected)
-        eject();
-    
-    
-    if(inTime)
+    if(inTime) {
         if(!failInjected) {
             injectSalute();
         }
-    else
+    }
+    else {
         if(!saluteInjected) {
             injectFail();
         }
+    }
     
     signInjected = false;
 }
