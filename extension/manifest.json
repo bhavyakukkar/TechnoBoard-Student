@@ -27,13 +27,12 @@
     {
       "matches": ["https://christuniversity.webex.com/*",
       "https://meet.google.com/*"],
-      "resources": ["html/sign.html"]
+      "resources": ["html/sign.html", "html/fail.html", "html/salute.html"]
     },
     {
       "matches": ["https://christuniversity.webex.com/*",
         "https://meet.google.com/*"],
         "resources": ["html/login.html","js/login.js"]
-    
     }
   ]
 }

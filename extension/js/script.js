@@ -32,9 +32,12 @@ function update() {
 
                     injectSign();
 
+                    /*setTimeout(function() {
+                        ejectSign(false);
+                    }, 180000);*/
                     setTimeout(function() {
-                        ejectSign();
-                    }, 180000);
+                        ejectSign(false);
+                    }, 30000);
                 }
             }
         }
@@ -47,9 +50,12 @@ function update() {
 function suspendUpdate() {
     
     seekRequest = false;
+    /*setTimeout(function() {
+        seekRequest = true;
+    }, 180000);*/
     setTimeout(function() {
         seekRequest = true;
-    }, 180000);
+    }, 20000);
 }
 
 //Abstract inject function
@@ -57,9 +63,6 @@ function inject(source) {
     fetch(chrome.runtime.getURL(source)).then(r => r.text()).then(html => {
         document.body.insertAdjacentHTML('beforeend', html);
     });
-    setTimeout(function() {
-        document.getElementById("index_link").addEventListener("click", sign);
-    }, 500);
 }
 
 //Eject all injected content
@@ -73,6 +76,10 @@ function injectSign() {
     if(!signInjected)
         inject('../html/sign.html');
     
+    setTimeout(function() {
+        document.getElementById("index_link").addEventListener("click", sign);
+    }, 500);
+
     signInjected = true;
 }
 
@@ -107,17 +114,17 @@ function sign() {
     xmlhttp.open("GET", "https://technoboard-extension.000webhostapp.com/ATS/php/student/s-ATS-sign.php?id=bhavya&t=john1024&c=csc101", true);
     xmlhttp.send();
 
-    ejectSign();
+    ejectSign(true);
 }
 
 
 function checkLogin(){
     if(!localStorage.username){
-        inject("html/login.html");
-        }
-          else{
-           //navigate to website
-             };
+        inject("../html/login.html");
+    }
+    else{
+        //navigate to website
+    };
 }
 
 
