@@ -37,7 +37,7 @@ function update() {
                     }, 180000);*/
                     setTimeout(function() {
                         ejectSign(false);
-                    }, 30000);
+                    }, 60000);
                 }
             }
         }
@@ -50,12 +50,12 @@ function update() {
 function suspendUpdate() {
     
     seekRequest = false;
-    /*setTimeout(function() {
-        seekRequest = true;
-    }, 180000);*/
     setTimeout(function() {
         seekRequest = true;
-    }, 20000);
+    }, 180000);
+    /*setTimeout(function() {
+        seekRequest = true;
+    }, 20000);*/
 }
 
 //Abstract inject function
