@@ -6,7 +6,7 @@ var failInjected = false;
 
 //Init method
 function init() {
-    checkLogin();
+    //checkLogin();
     updateLoop();
 }
 
@@ -85,11 +85,13 @@ function injectSign() {
 
 //Injects salute after student responded within 3 mins
 function injectSalute() {
+    saluteInjected = true;
     inject('../html/salute.html');
 }
 
 //Injects salute after student failed to respond within 3 mins
 function injectFail() {
+    failInjected = true;
     inject('../html/fail.html');
 }
 
@@ -99,10 +101,15 @@ function ejectSign(inTime) {
     if(signInjected)
         eject();
     
+    
     if(inTime)
-        injectSalute();
+        if(!failInjected) {
+            injectSalute();
+        }
     else
-        injectFail();
+        if(!saluteInjected) {
+            injectFail();
+        }
     
     signInjected = false;
 }
