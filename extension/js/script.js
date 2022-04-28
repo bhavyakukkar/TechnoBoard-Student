@@ -6,7 +6,7 @@ var failInjected = false;
 
 //Init method
 function init() {
-    //checkLogin();
+//    checkLogin();
     updateLoop();
 }
 
@@ -155,9 +155,17 @@ function addLogin(username) {
         });
     });*/
 
-    chrome.runtime.getBackgroundPage(function(bgPage) {
-        bgPage.login(username);
+    var dataObj={};
+    dataObj[username] = username;
+    chrome.storage.local.set(dataObj);
+    //this is to retrieve the stored data
+    chrome.storage.local.get(dataObj,function(result){
+        console.log(result[username]);
     });
+    
+    // chrome.runtime.getBackgroundPage(function(bgPage) {
+    //     bgPage.login(username);
+    // });
     window.close();
 }
 
