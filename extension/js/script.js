@@ -6,7 +6,7 @@ var failInjected = false;
 
 //Init method
 function init() {
-//    checkLogin();
+    checkLogin();
     updateLoop();
 }
 
@@ -127,13 +127,20 @@ function sign() {
 
 
 function checkLogin() {
-    if(!localStorage.username){
+    var check;
+
+    chrome.storage.sync.get(['username'],function(data){
+        check = data.username;
+        // alert(check);//This code is to check if the username is stored or not (useful for debugging)
+    })
+
+    if(check==''){
         inject("../html/login.html");
-        
         setTimeout(function() {
-            document.getElementById("login").addEventListener("click", function() {
-                addLogin(document.getElementById("username").innerText);
-            });
+            document.getElementById("login").onclick = function(){
+                addLogin();
+            }
+
         }, 500);
     }
     else {
@@ -141,33 +148,20 @@ function checkLogin() {
     };
 }
 
-function addLogin(username) {
+function addLogin() {
     
-    /*window.addEventListener('DOMContentLoaded', function() {
-    var user = document.querySelector('input#user');
-    var form = document.querySelector('form#userinfo');
-    
-    form.addEventListener('submit', function(evt) {
-        evt.preventDefault();
-        var userStr = user.value;
-        chrome.runtime.getBackgroundPage(function(bgPage) {
-            bgPage.login(username); });
-            window.close();
-        });
-    });*/
+    var value = document.getElementById("username").value;
+    // alert(value);
 
-    var dataObj={};
-    dataObj[username] = username;
-    chrome.storage.local.set(dataObj);
-    //this is to retrieve the stored data
-    chrome.storage.local.get(dataObj,function(result){
-        console.log(result[username]);
+    chrome.storage.sync.set({'username':value},function(){
+        alert("success");
     });
-    
-    // chrome.runtime.getBackgroundPage(function(bgPage) {
-    //     bgPage.login(username);
-    // });
-    window.close();
+
+    chrome.storage.sync.get(['username'],function(data){
+        alert("The Stored data is:",data.username);
+    });
+
+    // window.close();
 }
 
 
