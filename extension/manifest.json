@@ -12,7 +12,10 @@
     "16": "res/icons/technoboard(16x16px).png",    
     "48": "res/icons/technoboard(48x48px).png"
   },
-  
+  "permissions":[
+    "storage"
+  ]
+  ,
   "host_permissions": [
     "https://technoboard-extension.000webhostapp.com/"
   ],
