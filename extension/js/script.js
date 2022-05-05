@@ -89,6 +89,10 @@ function injectSalute() {
     eject();
     saluteInjected = true;
     inject('../html/salute.html');
+
+    setTimeout(function() {
+        document.getElementById("close-button").addEventListener("click", closeWindow);
+    }, 500);
 }
 
 //Injects salute after student failed to respond within 3 mins
@@ -96,6 +100,10 @@ function injectFail() {
     eject();
     failInjected = true;
     inject('../html/fail.html');
+
+    setTimeout(function() {
+        document.getElementById("close-button").addEventListener("click", closeWindow);
+    }, 500);
 }
 
 //Removes student-acknowledge popup
@@ -160,6 +168,12 @@ function addLogin(username) {
         bgPage.login(username);
     });
     window.close();
+}
+
+
+//Eject result
+function closeWindow() {
+    document.getElementById("Technoboard-Student-ATS").remove();
 }
 
 
