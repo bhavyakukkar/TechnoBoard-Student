@@ -18,6 +18,27 @@
                 padding: 10px;
                 margin: 0;
             }
+            .button{
+                display:inline-block;
+                color:#020241;
+                text-align:center;
+                background-color:#FFE754;
+                border-radius:15px;
+                padding:15px 25px;
+                margin:20px;
+                font-size:15px;
+                cursor:pointer;
+                box-shadow:0 9px #534a0f;
+                font-weight:bold;
+            }
+            .button:hover{
+                background-color:#9e8b0c;
+            }
+            .button:active{
+                background-color:#9e8b0c;
+                box-shadow:0 5px #534a0f;
+                transform:translateY(4px);
+            }
             h1{
                 text-align:center;
                 color:#FFE754;
@@ -41,7 +62,7 @@
                 top:0;
                 right:15px;
                 width:400px;
-                height:250px;
+                height:330px;
                 border:3px solid #FFE754;
             }
             .text01{
@@ -68,6 +89,7 @@
                 <h3>Oh, snap!</h3>
                 <p class="text01">You just failed to press the button, thereby, losing your attendance!</p>
                 <p class="text02">Better luck next time!</p>
+                <button class="button" id="close-button">Close</button>
             </center>
         </div>
     </div>
