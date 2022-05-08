@@ -52,11 +52,22 @@ function suspendUpdate() {
     }, 20000);
 }
 
+
+//IMPORTANT: Where document.getElementById('') is to be used, use getFromInjectedScope('') instead
+//
 //Shifts scope to extension-injected node only,
 //so that non-extension elements of similar IDs are not selected
-function getInjectedScope() {
-    injectedScope = document.getElementById("Technoboard-Student-ATS");
-    return injectedScope;
+function getFromInjectedScope(id) {
+    var injectedScope = document.getElementById("Technoboard-Student-ATS");
+
+    var allInjectedElements = injectedScope.getElementsByTagName("*");
+    for (var i = 0; i < allInjectedElements.length; i++) {
+        if (allInjectedElements[i].id === id) {
+            requestedElement = allInjectedElements[i];
+            break;
+        }
+    }
+    return requestedElement;
 }
 
 //Abstract inject function
@@ -81,7 +92,7 @@ function injectSign() {
         inject('../html/sign.html');
     
     setTimeout(function() {
-        getInjectedScope().getElementById("index-link").addEventListener("click", sign);
+        getFromInjectedScope("index-link").addEventListener("click", sign);
     }, 500);
 
     signInjected = true;
@@ -96,8 +107,8 @@ function injectSalute() {
         inject('../html/salute.html');
 
         setTimeout(function() {
-            getInjectedScope().getElementById("close-button").addEventListener("click", eject);
-        }, 500);
+            getFromInjectedScope("close-button").addEventListener("click", eject);
+        }, 1000);
     }
 
     signInjected = false;
@@ -112,8 +123,8 @@ function injectFail() {
         inject('../html/fail.html');
 
         setTimeout(function() {
-            getInjectedScope().getElementById("close-button").addEventListener("click", eject);
-        }, 500);
+            getFromInjectedScope("close-button").addEventListener("click", eject);
+        }, 1000);
     }
 
     signInjected = false;
@@ -131,7 +142,7 @@ function sign() {
     xmlhttp.open("GET", "https://technoboard-extension.000webhostapp.com/ATS/php/student/s-ATS-sign.php?id=1940224_Ronald&t=john1024&c=csc101", true);
     xmlhttp.send();
 
-    ejectSign(true);
+    injectSalute();
 }
 
 
@@ -146,7 +157,7 @@ function checkLogin() {
     if(check==''){
         inject("../html/login.html");
         setTimeout(function() {
-            getInjectedScope().getElementById("login").onclick = function(){
+            getFromInjectedScope("login").onclick = function(){
                 addLogin();
             }
 
@@ -159,7 +170,7 @@ function checkLogin() {
 
 function addLogin() {
     
-    var value = getInjectedScope().getElementById("username").value;
+    var value = getFromInjectedScope("username").value;
     // alert(value);
 
     chrome.storage.sync.set({'username':value},function(){
