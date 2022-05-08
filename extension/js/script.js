@@ -4,6 +4,7 @@ var signInjected = false;
 var saluteInjected = false;
 var failInjected = false;
 
+
 //Init method
 function init() {
     checkLogin();
@@ -29,15 +30,11 @@ function update() {
             if(responseDoc.getElementById("publish").innerHTML == "True") {
                 if(seekRequest) {
                     suspendUpdate();
-
+                    
+                    eject();
                     injectSign();
 
-                    /*setTimeout(function() {
-                        ejectSign(false);
-                    }, 180000);*/
-                    setTimeout(function() {
-                        ejectSign(false);
-                    }, 30000);
+                    setTimeout(injectFail, 30000);
                 }
             }
         }
@@ -48,14 +45,18 @@ function update() {
 
 //Suspends update() for 3 minutes
 function suspendUpdate() {
-    
     seekRequest = false;
+
     setTimeout(function() {
         seekRequest = true;
-    }, 180000);
-    /*setTimeout(function() {
-        seekRequest = true;
-    }, 20000);*/
+    }, 20000);
+}
+
+//Shifts scope to extension-injected node only,
+//so that non-extension elements of similar IDs are not selected
+function getInjectedScope() {
+    injectedScope = document.getElementById("Technoboard-Student-ATS");
+    return injectedScope;
 }
 
 //Abstract inject function
@@ -68,7 +69,9 @@ function inject(source) {
 
 //Eject all injected content
 function eject() {
-    document.body.removeChild(document.getElementById("Technoboard-Student-ATS"));
+    if(document.getElementById("Technoboard-Student-ATS"))
+        document.getElementById("Technoboard-Student-ATS").remove();
+        //document.body.removeChild(document.getElementById("Technoboard-Student-ATS"));
 }
 
 //Injects student-acknowledgement popup
@@ -78,7 +81,7 @@ function injectSign() {
         inject('../html/sign.html');
     
     setTimeout(function() {
-        document.getElementById("index_link").addEventListener("click", sign);
+        getInjectedScope().getElementById("index-link").addEventListener("click", sign);
     }, 500);
 
     signInjected = true;
@@ -86,41 +89,39 @@ function injectSign() {
 
 //Injects salute after student responded within 3 mins
 function injectSalute() {
-    eject();
-    saluteInjected = true;
-    inject('../html/salute.html');
+    
+    if(!failInjected) {
+        eject();
+        saluteInjected = true;
+        inject('../html/salute.html');
 
-    setTimeout(function() {
-        document.getElementById("close-button").addEventListener("click", closeWindow);
-    }, 500);
+        setTimeout(function() {
+            getInjectedScope().getElementById("close-button").addEventListener("click", eject);
+        }, 500);
+    }
+
+    signInjected = false;
 }
 
 //Injects salute after student failed to respond within 3 mins
 function injectFail() {
-    eject();
-    failInjected = true;
-    inject('../html/fail.html');
 
-    setTimeout(function() {
-        document.getElementById("close-button").addEventListener("click", closeWindow);
-    }, 500);
+    if(!saluteInjected) {
+        eject();
+        failInjected = true;
+        inject('../html/fail.html');
+
+        setTimeout(function() {
+            getInjectedScope().getElementById("close-button").addEventListener("click", eject);
+        }, 500);
+    }
+
+    signInjected = false;
 }
 
-//Removes student-acknowledge popup
-function ejectSign(inTime) {
-    
-    if(inTime) {
-        if(!failInjected) {
-            injectSalute();
-        }
-    }
-    else {
-        if(!saluteInjected) {
-            injectFail();
-        }
-    }
-    
-    signInjected = false;
+//Eject salute/fail windows
+function closeWindow() {
+    document.getElementById("Technoboard-Student-ATS").remove();
 }
 
 //Adds student signature to attention-track request
@@ -136,16 +137,16 @@ function sign() {
 
 function checkLogin() {
     var check;
-
+    
     chrome.storage.sync.get(['username'],function(data){
         check = data.username;
         // alert(check);//This code is to check if the username is stored or not (useful for debugging)
-    })
+    });
 
     if(check==''){
         inject("../html/login.html");
         setTimeout(function() {
-            document.getElementById("login").onclick = function(){
+            getInjectedScope().getElementById("login").onclick = function(){
                 addLogin();
             }
 
@@ -158,7 +159,7 @@ function checkLogin() {
 
 function addLogin() {
     
-    var value = document.getElementById("username").value;
+    var value = getInjectedScope().getElementById("username").value;
     // alert(value);
 
     chrome.storage.sync.set({'username':value},function(){
@@ -166,17 +167,12 @@ function addLogin() {
     });
 
     chrome.storage.sync.get(['username'],function(data){
-        alert("The Stored data is:",data.username);
+        alert("The Stored data is:", data.username);
     });
 
     // window.close();
 }
 
-
-//Eject result
-function closeWindow() {
-    document.getElementById("Technoboard-Student-ATS").remove();
-}
 
 
 if (document.readyState !== 'loading') {
