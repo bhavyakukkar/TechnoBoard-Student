@@ -145,43 +145,38 @@ function sign() {
     injectSalute();
 }
 
+function injectLogin() {
+    inject("../html/login.html");
+
+    setTimeout(function() {
+        getFromInjectedScope("login").onclick = function(){
+            addLogin();
+        }
+    }, 500);
+}
 
 function checkLogin() {
-    var check;
-    
-    chrome.storage.sync.get(['username'],function(data){
-        check = data.username;
-        // alert(check);//This code is to check if the username is stored or not (useful for debugging)
+    var username;
+
+    chrome.storage.sync.get('Technoboard-Student-ATS-username', function(data) {
+        username = data['Technoboard-Student-ATS-username'];
+        if(!username)
+            injectLogin();
     });
-
-    if(check==''){
-        inject("../html/login.html");
-        setTimeout(function() {
-            getFromInjectedScope("login").onclick = function(){
-                addLogin();
-            }
-
-        }, 500);
-    }
-    else {
-        //navigate to website
-    };
 }
 
 function addLogin() {
     
-    var value = getFromInjectedScope("username").value;
-    // alert(value);
+    var username = getFromInjectedScope("username").value;
 
-    chrome.storage.sync.set({'username':value},function(){
-        alert("success");
+    var key = "Technoboard-Student-ATS-username",
+        value = username;
+    
+    var usernameJson = {};
+    usernameJson[key] = value;
+    chrome.storage.sync.set(usernameJson, function() {
+        //login added
     });
-
-    chrome.storage.sync.get(['username'],function(data){
-        alert("The Stored data is:", data.username);
-    });
-
-    // window.close();
 }
 
 
