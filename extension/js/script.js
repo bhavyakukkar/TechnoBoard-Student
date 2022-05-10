@@ -7,7 +7,7 @@ var failInjected = false;
 
 //Init method
 function init() {
-    checkLogin();
+    //checkLogin();
     updateLoop();
 }
 
