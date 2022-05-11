@@ -7,8 +7,10 @@ var failInjected = false;
 
 //Init method
 function init() {
-    //checkLogin();
+    checkLogin();
     updateLoop();
+
+    //chrome.storage.sync.clear();
 }
 
 //calls to loop update() at an interval of 2 seconds
@@ -149,7 +151,7 @@ function injectLogin() {
     inject("../html/login.html");
 
     setTimeout(function() {
-        getFromInjectedScope("login").onclick = function(){
+        getFromInjectedScope("login").onclick = function() {
             addLogin();
         }
     }, 500);
